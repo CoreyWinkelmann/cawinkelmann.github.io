@@ -12,4 +12,4 @@ jobs:
           key: cache
           paths:
             - ~/.stack
-            - run: stack exec blog build
+      - run: stack exec blog build
