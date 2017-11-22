@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/cagenix
+    working_directory: ~/cawinkelmann
     docker:
       - image: futtetennista/hakyll:latest
     branches:
@@ -18,7 +18,7 @@ jobs:
           command: stack build
       - save_cache:
           paths:
-            - ~/cagenix/.stack-work
+            - ~/cawinkelmann/.stack-work
             - /root/.stack/
           key: v1-stack-work-{{ checksum "blog.cabal" }}
       - deploy:
