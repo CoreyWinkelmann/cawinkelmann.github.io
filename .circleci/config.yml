@@ -1,6 +1,5 @@
 version: 2
 jobs:
-  working_directory: ~/cawinkelmann.github.io
   build:
     docker:
       - image: haskell:latest
@@ -10,7 +9,7 @@ jobs:
           key: cache
       - run: stack build --fast
       - save_cache:
-        paths:
-          - ~/.stack
-        key: cache
-      - run: stack exec blog build
+          key: cache
+          paths:
+            - ~/.stack
+            - run: stack exec blog build
