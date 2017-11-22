@@ -7,6 +7,7 @@ jobs:
       - checkout
       - restore_cache:
           key: cache
+      - run: stack setup
       - run: stack build --fast
       - save_cache:
           key: cache
