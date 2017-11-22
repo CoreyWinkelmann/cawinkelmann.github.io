@@ -1,0 +1,38 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/cagenix
+    docker:
+      - image: futtetennista/hakyll:latest
+    branches:
+      only:
+        - source
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-stack-{{ checksum "blog.cabal" }}
+            - stack-work-
+      - run:
+          name: Build site executable
+          command: stack build
+      - save_cache:
+          paths:
+            - ~/cagenix/.stack-work
+            - /root/.stack/
+          key: v1-stack-work-{{ checksum "blog.cabal" }}
+      - deploy:
+          name: Deploy master to Github Pages
+          command: |
+            git config --global user.email robots@circleci.com
+            git config --global user.name CircleCI
+            stack exec blog rebuild
+            git checkout master
+            git pull --rebase
+            # Overwrite existing files with new files
+            cp -a _site/. .
+            #  Commit
+            git add --all
+            git commit -m "[`date '+%F %T %Z'`] New release"
+            # Push
+            git push origin master:master
