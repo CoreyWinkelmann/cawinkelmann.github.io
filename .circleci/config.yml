@@ -28,7 +28,7 @@ jobs:
             git config --global user.name CircleCI
             stack exec blog rebuild
             git checkout master
-            git pull --rebase
+            git pull
             # Overwrite existing files with new files
             cp -a _site/. .
             #  Commit
