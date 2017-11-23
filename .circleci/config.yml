@@ -12,7 +12,6 @@ jobs:
       - restore_cache:
           keys:
             - v1-stack-{{ checksum "blog.cabal" }}
-            - stack-work-
       - run:
           name: Build site executable
           command: stack build
@@ -20,7 +19,7 @@ jobs:
           paths:
             - ~/cawinkelmann/.stack-work
             - /root/.stack/
-          key: v1-stack-work-{{ checksum "blog.cabal" }}
+          key: v1-stack-{{ checksum "blog.cabal" }}
       - deploy:
           name: Deploy master to Github Pages
           command: |
@@ -28,7 +27,7 @@ jobs:
             git config --global user.name CircleCI
             stack exec blog rebuild
             git checkout master
-            git pull
+            git pull --rebase
             # Overwrite existing files with new files
             cp -a _site/. .
             #  Commit
