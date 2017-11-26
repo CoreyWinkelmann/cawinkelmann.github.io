@@ -5,8 +5,8 @@ jobs:
     docker:
       - image: futtetennista/hakyll:latest
     branches:
-      only:
-        - source
+      ignore:
+        - master
     steps:
       - checkout
       - restore_cache:
