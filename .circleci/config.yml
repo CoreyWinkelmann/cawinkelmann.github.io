@@ -26,6 +26,8 @@ jobs:
             git config --global user.email robots@circleci.com
             git config --global user.name CircleCI
             stack exec blog rebuild
+            git branch -D master
+            git fetch origin
             git checkout master
             git pull --rebase
             # Overwrite existing files with new files
