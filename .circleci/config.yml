@@ -20,9 +20,6 @@ jobs:
             - ~/cawinkelmann/.stack-work
             - /root/.stack/
           key: v1-stack-{{ checksum "blog.cabal" }}
-      - add_ssh_keys:
-          fingerprints:
-            - "5d:75:7c:53:95:60:ed:44:90:a6:ff:03:e0:1d:8f:64"
       - deploy:
           name: Deploy master to Github Pages
           command: |
